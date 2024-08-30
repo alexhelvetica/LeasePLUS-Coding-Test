@@ -54,7 +54,9 @@ function packageCalculation(
 
   switch (employerType) {
     case "Corporate":
+      //Corp Casuals Don't get a package
       if (employmentType != "Casual") {
+        // Salaries > 100,000, the 1st 100,000 is 1%, the rest is 0.1%
         if (salary > 100000) {
           package += (salary - 100000) * 0.001;
           salary = 100000;
@@ -63,6 +65,7 @@ function packageCalculation(
 
         let packageModifier = 1;
 
+        //Part Time Staff's Packages are based on their hours compared with fulltime.
         if (employmentType == "PartTime") {
           if (/*!hoursWorked || */ hoursWorked < 0 || hoursWorked > 38) {
             console.error(
@@ -77,17 +80,24 @@ function packageCalculation(
       break;
 
     case "Hospital":
+      //Default Package is $10,000.
       packageDefault = 10000;
       package = packageDefault;
+
+      //If 20% Salary is more than the default, the package is now 20% Salary
       if (salary * 0.2 > package) {
         package = salary * 0.2;
         if (package > 30000) {
           package = 30000;
         }
       }
+      //If they are univeristy educated, they get an extra $5,000
       if (universityEducated) {
         package += 5000;
       }
+
+      //If they are a fulltime staff, their package is increased by 9.5%, 
+      //and they have an extra 1.2% of their salary
       if (employmentType == "FullTime") {
         package *= 1.095;
         package += salary * 0.012;
@@ -95,19 +105,25 @@ function packageCalculation(
 
       break;
     case "PBI":
+      //base package upper limit is $50k.
       packageDefault = 50000;
       package = packageDefault;
 
+      //Casual staff only get paid 10% of their salary as base package.
       if (employmentType == "Casual") {
         package = salary * 0.1;
-      } else if (salary * 0.3255 < package) {
+      }
+      //Everyone else, 32.55% of Salary, with the $50k limit. 
+      else if (salary * 0.3255 < package) {
         package = salary * 0.3255;
       }
 
+      // $2000 + 1% Salary Bonus if they have a bachelor's degree or higher.
       if (universityEducated) {
         package += 2000 + salary * 0.01;
       }
 
+      //Part Time staff get paid only 80% of their calculated package.
       if (employmentType == "PartTime") {
         package *= 0.8;
       }
