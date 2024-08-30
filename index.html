@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salary Calculator</title>
+
+    <script src="packageCalculator.js"></script>
+  </head>
+  <body>
+    <form id="packageCalculator" action="javascript:void(0);">
+      <p>
+        <label for="employerType">Company Types</label>
+        <select id="employerType" required>
+          <option value="" selected disabled></option>
+          <option value="Corporate">Corporate</option>
+          <option value="Hospital">Hospital</option>
+          <option value="PBI">PBI</option>
+        </select>
+      </p>
+      <p>
+        <label for="employmentType">Employment Types</label>
+        <select id="employmentType" required>
+          <option value="" selected disabled></option>
+          <option value="FullTime">Full Time</option>
+          <option value="PartTime">Part Time</option>
+          <option value="Casual">Casual</option>
+        </select>
+      </p>
+      <p>
+        <label for="salary">Salary</label>
+        <input type="number" id="salary" min="0" required />
+      </p>
+      <p>
+        <label for="universityEducated">University Educated?</label>
+        <input type="checkbox" id="universityEducated" />
+      </p>
+      <p>
+        <label for="hoursWorked">Weekly Hours</label>
+        <input type="number" id="hoursWorked" min="0" max="38" />
+      </p>
+
+      <p>
+        <button type="submit" onclick="packageSubmission()">Submit</button>
+      </p>
+    </form>
+    <p id="salaryPackageTextBox">Complete Form for Salary Package</p>
+  </body>
+</html>
